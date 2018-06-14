@@ -73,22 +73,31 @@ end
   end
 
   def draw?
-    full? && !won?
+    if full? && !won?
+      return true
+    else
+      return false
+    end
   end
 
   def over?
-    won? || draw? || full?
+    if won? || draw? || full?
+      return true
+    else return false
+    end
   end
 
   def winner
+    if won?
     winning_combination = won?
-    if winning_combination == nil
-       nil
-     elsif [winning_combination[0]] == "X"
-      "X"
+    if winning_combination.all? {|i| @board[i] == "X"}
+        return "X"
+     elsif winning_combination.all? {|i| @board[i] == "O"}
+        return "O"
+     end
    else
-     "O"
-   end
+     return nil
+  end
 end
 
   def play
@@ -101,4 +110,6 @@ end
   else
     puts "Cat's Game!"
   end
+end
+
 end
