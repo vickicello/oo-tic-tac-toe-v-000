@@ -100,12 +100,12 @@ end
   end
 end
 
-  def play
-    until over?
-    turn
-  end
+ def play
+  until over?
+  turn
+ end
   if won?
-    puts "Congratulations #{letter}!"
+    puts "Congratulations #{winner}!"
   else
     puts "Cat's Game!"
   end
