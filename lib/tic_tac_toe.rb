@@ -40,7 +40,7 @@ class TicTacToe
      false
     elsif !(index.between?(0, 8))
      false
-    else 
+    else
      true
  end
 end
@@ -64,3 +64,45 @@ end
   def turn_count
   @board.count{|token| token == "X" || token == "O"}
   end
+
+  def won?
+    winning_combos.first
+  end
+
+  def full?
+    !board.any? do |board_position|
+    board_position == " "
+  end
+end
+
+  def draw?
+    full? && !won?
+  end
+
+  def over?
+    won? || draw? || full?
+  end
+
+  def winner
+    winning_combination = won?
+    if winning_combination == nil
+       nil
+     elsif [winning_combination[0]] == "X"
+      "X"
+   else
+     "O"
+   end
+end
+
+  def play
+    until over?
+    turn
+  end
+  letter = winner
+    if letter != nil
+    puts "Congratulations #{letter}!"
+  else
+    puts "Cat's Game!"
+  end
+end
+
