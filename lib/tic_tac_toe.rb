@@ -36,21 +36,15 @@ class TicTacToe
   end
 
   def valid_move?(index)
-    if position_taken?(index)
-     false
-    elsif !(index.between?(0, 8))
-     false
-    else
-     true
- end
-end
+    index.between?(0, 8) && !position_taken?(index)
+  end
 
   def turn
      puts "Please enter 1-9:"
      input = gets.strip
      index = input_to_index(input)
-     if valid_move?(board, index)
-       move(index, current_player(@board))
+     if valid_move?(index)
+       move(index, current_player)
        display_board
    else
      turn
@@ -66,14 +60,17 @@ end
   end
 
   def won?
-    winning_combos.first
+    WIN_COMBINATIONS.each do |combination|
+      if combination.all? {|i| @board[i] == "X"} || combination.all? {|i| @board[i] == "O"}
+        return combination
+      end
+    end
+    return false
   end
 
   def full?
-    !board.any? do |board_position|
-    board_position == " "
+    @board.all? {|space| space == "X" || space == "O"}
   end
-end
 
   def draw?
     full? && !won?
