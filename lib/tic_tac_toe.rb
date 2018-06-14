@@ -104,8 +104,7 @@ end
     until over?
     turn
   end
-  letter = winner
-    if letter != nil
+  if won?
     puts "Congratulations #{letter}!"
   else
     puts "Cat's Game!"
